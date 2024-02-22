@@ -8,7 +8,7 @@ public class JoinView {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("입력(ID, 비밀번호, 비빌번호 확인, 이름, 주민번호, 전화번호, 주소, 직업)");
-        UserDTO userDTO = new UserBuilder()
+        UserDTO user = new UserBuilder()
                 .username(scan.next())
                 .password(scan.next())
                 .passwordConfirm(scan.next())
@@ -19,6 +19,6 @@ public class JoinView {
                 .job(scan.next())
                 .build();
 
-        System.out.printf(userDTO.toString());
+        System.out.printf(user.toString());
     }
 }
