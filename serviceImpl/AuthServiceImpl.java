@@ -1,7 +1,6 @@
 package serviceImpl;
 
 import service.AuthService;
-import service.UtilService;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();

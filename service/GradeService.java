@@ -1,7 +1,9 @@
 package service;
 
-public interface GradeService {
-    public int getTotalScore();
+import model.SubjectDTO;
 
-    public double getAvgScore();
+public interface GradeService {
+    public int getTotalScore(SubjectDTO subject);
+
+    public double getAvgScore(int total);
 }

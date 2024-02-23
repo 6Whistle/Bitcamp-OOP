@@ -1,8 +1,10 @@
 package service;
 
-public interface KaupService {
-    public double createBMI();
+import model.UserDTO;
 
-    public String createBodyMass();
+public interface KaupService {
+    public double createBMI(UserDTO user);
+
+    public String createBodyMass(double bmi);
 }
 
