@@ -37,10 +37,10 @@ public class BoardDTO {
 
     @Override
     public String toString() {
-        return "BoardDTO{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", writer='" + writer + '\'' +
+        return "게시글{" +
+                "제목='" + title + '\'' +
+                ", 내용='" + content + '\'' +
+                ", 작성자='" + writer + '\'' +
                 '}';
     }
 }
