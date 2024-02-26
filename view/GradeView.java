@@ -13,8 +13,7 @@ import serviceImpl.UtilServiceImpl;
 import java.util.Scanner;
 
 public class GradeView {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(Scanner scan) {
         GradeService grade = GradeServiceImpl.getInstance();
         UtilService util = UtilServiceImpl.getInstance();
 

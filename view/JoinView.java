@@ -5,8 +5,7 @@ import model.UserDTO;
 import java.util.Scanner;
 
 public class JoinView {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(Scanner scan) {
         System.out.println("입력(ID, 비밀번호, 비빌번호 확인, 이름, 주민번호, 전화번호, 주소, 직업)");
         UserDTO user = new UserBuilder()
                 .username(scan.next())

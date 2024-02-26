@@ -8,7 +8,7 @@ import serviceImpl.KaupServiceImpl;
 import serviceImpl.UtilServiceImpl;
 
 public class KaupView {
-    public static void main(String[] args) {
+    public static void main() {
         {
             UtilService util = UtilServiceImpl.getInstance();
             KaupService kaup = KaupServiceImpl.getInstance();
