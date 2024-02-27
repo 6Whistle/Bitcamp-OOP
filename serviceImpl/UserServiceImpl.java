@@ -11,19 +11,25 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     private static UserService instance = new UserServiceImpl();
 
-    private UserServiceImpl(){}
+    Map<String, UserDTO> users;
+    private UserServiceImpl(){  users = new HashMap<>();  }
 
     public static UserService getInstance(){
         return instance;
     }
     @Override
-    public String join() {
-        return null;
+    public String join(UserDTO user) {
+        users.put(user.getName(), user);
+        return "회원가입 성공 : " + user.toString();
     }
 
     @Override
-    public String login() {
-        return null;
+    public String login(UserDTO user) {
+        System.out.println(user);
+        UserDTO findUser = users.get(user.getUsername());
+        return findUser == null ? "아이디 없음" :
+               findUser.getPassword().compareTo(user.getPassword()) != 0 ? "아이디 불일치" :
+               "성공";
     }
 
     @Override
@@ -41,5 +47,30 @@ public class UserServiceImpl implements UserService {
                                     .build());
         }
         return users;
+    }
+
+    @Override
+    public UserDTO findUser(String username) {
+        UserDTO findUser = users.get(username);
+        return new UserBuilder()
+                .username(findUser.getUsername())
+                .password(findUser.getPassword())
+                .passwordConfirm(findUser.getPasswordConfirm())
+                .name(findUser.getName())
+                .socialSecurityNumber(findUser.getSocialSecurityNumber())
+                .phoneNumber(findUser.getPhoneNumber())
+                .address(findUser.getAddress())
+                .job(findUser.getJob())
+                .build();
+    }
+
+    @Override
+    public Map<String, UserDTO> getUserMap() {
+        return users;
+    }
+
+    @Override
+    public String countUsers() {
+        return users.size() + "명";
     }
 }

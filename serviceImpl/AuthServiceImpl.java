@@ -85,7 +85,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Map<String, UserDTO> getUserMap() {
-//        users.forEach((k, v)-> System.out.printf("{%s, %s}", k, v));
         return users;
     }
 

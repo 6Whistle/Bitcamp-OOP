@@ -5,9 +5,13 @@ import model.UserDTO;
 import java.util.Map;
 
 public interface UserService {
-    public String join();
+    String join(UserDTO user);
 
-    public String login();
+    String login(UserDTO user);
 
-    public Map<String, UserDTO> addUsers();
+    Map<String, UserDTO> addUsers();
+
+    UserDTO findUser(String username);
+    Map<String, UserDTO> getUserMap();
+    String countUsers();
 }

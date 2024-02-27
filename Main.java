@@ -15,7 +15,7 @@ public class Main {
                 case "2":   GradeView.main(scan);   break;
                 case "3":   BoardView.main();       break;
                 case "4":   KaupView.main();        break;
-                case "5":   JoinView.main(scan);    break;
+                case "5":   UserView.main(scan);    break;
                 default:    System.out.println("잘못된 입력입니다");
             }
         }

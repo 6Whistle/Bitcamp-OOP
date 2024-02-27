@@ -2,14 +2,12 @@ package controller;
 
 
 import builder.UserBuilder;
-import model.UserDTO;
 import service.AuthService;
 import serviceImpl.AuthServiceImpl;
 
 import java.util.Scanner;
 
 public class AuthController {
-
     AuthService auth;
 
     public AuthController(){
@@ -50,32 +48,30 @@ public class AuthController {
     public void updatePassword(Scanner scan){
         System.out.println("=== 비번 변경 ===");
         System.out.println("입력(ID, 비번)");
-        auth.updatePassword(scan.next(), scan.next());
+        System.out.println(auth.updatePassword(scan.next(), scan.next()));
     }
     public void deleteUser(Scanner scan){
         System.out.println("=== 탈퇴 ===");
         System.out.println("입력(ID)");
-        auth.deleteUser(scan.next());
+        System.out.println(auth.deleteUser(scan.next()));
     }
-    public void getUsersList(){
+    public void getUsersMap(){
         System.out.println("=== 회원목록 ===");
-        auth.getUserMap();
+        auth.getUserMap().forEach((k, v) -> System.out.printf("{%s, %s}\n", k, v));
     }
     public void findUsersByName(Scanner scan){
         System.out.println("=== 이름 검색 ===");
         System.out.println("입력(이름)");
-        auth.findUsersByJob(scan.next()).forEach(i -> System.out.println(i));
+        System.out.println(auth.findUsersByName(scan.next()).toString());
     }
     public void findUsersByJob(Scanner scan){
         System.out.println("=== 직업 검색 ===");
         System.out.println("입력(직업)");
-        auth.findUsersByJob(scan.next()).forEach(i -> System.out.println(i));
+        System.out.println(auth.findUsersByJob(scan.next()).toString());
 
     }
     public void countUsers(){
         System.out.println("=== 회원수 ===");
         System.out.println(auth.countUsers());
     }
-
-
 }
