@@ -17,7 +17,6 @@ public class JoinView {
                 .address(scan.next())
                 .job(scan.next())
                 .build();
-
         System.out.printf(user.toString());
     }
 }

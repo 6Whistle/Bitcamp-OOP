@@ -32,6 +32,13 @@ public class UtilServiceImpl implements UtilService {
     }
 
     @Override
+    public String createRandomUsername() {
+        String username = "";
+        for(; username.length() < 5; username += String.valueOf((char)('a' + this.createRandomInt(0, 26))));
+        return username;
+    }
+
+    @Override
     public String createRandomTitle(){
         String[] titles = {"국민경제자문회의의 조직·직무범위",
                 "국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원",

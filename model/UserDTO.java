@@ -1,6 +1,7 @@
 package model;
 
 public class UserDTO {
+    private int id;
     private String username;
     private String password;
     private String passwordConfirm;
@@ -108,7 +109,7 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-                "id='" + username + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", passwordConfirm='" + passwordConfirm + '\'' +
                 ", name='" + name + '\'' +
