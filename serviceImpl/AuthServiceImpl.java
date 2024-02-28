@@ -2,6 +2,7 @@ package serviceImpl;
 
 import builder.UserBuilder;
 import model.UserDTO;
+import repository.UserRepository;
 import service.AuthService;
 import service.UtilService;
 
@@ -41,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String join(UserDTO user) {
-        users.put(user.getName(), user);
+        users.put(user.getUsername(), user);
         return "회원가입 성공 : " + user.toString();
     }
 
@@ -70,10 +71,11 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String updatePassword(String username, String password) {
-        UserDTO user = users.get(username);
-        if (user == null) return "계정을 찾을 수 없습니다.";
-        user.setPassword(password);
+    public String updatePassword(UserDTO user) {
+        UserDTO findUser = users.get(user.getUsername());
+        if (findUser == null) return "계정을 찾을 수 없습니다.";
+        findUser.setPassword(user.getPassword());
+        findUser.setPasswordConfirm(user.getPassword());
         return "비밀번호 변경 성공";
     }
 

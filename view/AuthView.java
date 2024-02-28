@@ -19,7 +19,7 @@ public class AuthView {
                 case "3" : controller.findUserByID(scan);       break;
                 case "4" : controller.updatePassword(scan);     break;
                 case "5" : controller.deleteUser(scan);         break;
-                case "6" : controller.getUsersMap();           break;
+                case "6" : controller.getUsersMap();            break;
                 case "7" : controller.findUsersByName(scan);    break;
                 case "8" : controller.findUsersByJob(scan);     break;
                 case "9" : controller.countUsers();             break;
