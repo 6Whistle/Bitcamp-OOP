@@ -2,6 +2,7 @@ package service;
 
 import model.UserDTO;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -15,4 +16,14 @@ public interface UserService {
     Map<String, UserDTO> getUserMap();
 
     String login(UserDTO user);
+
+    String getUserByUsername(UserDTO user);
+
+    String updatePassword(UserDTO user);
+
+    String deleteUser(UserDTO user);
+
+    List<UserDTO> findUsersByName(UserDTO user);
+
+    List<UserDTO> findUsersByJob(UserDTO user);
 }

@@ -5,7 +5,9 @@ import model.UserDTO;
 import service.UtilService;
 import serviceImpl.UtilServiceImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserRepository {
@@ -58,5 +60,41 @@ public class UserRepository {
                 (findUser == null ||
                 findUser.getPassword().compareTo(user.getPassword()) != 0?
                 "실패" : "성공");
+    }
+
+    public String getUserByUsername(UserDTO user) {
+        UserDTO findUser = userMap.get(user.getUsername());
+        return findUser == null ? (user.getUsername() + " 탐색 실패") : findUser.toString();
+    }
+
+    public String updatePassword(UserDTO user) {
+        UserDTO findUser = userMap.get(user.getUsername());
+        if(findUser == null)    return user.getUsername() + " 탐색 실패";
+        findUser.setPassword(user.getPassword());
+        findUser.setPasswordConfirm(user.getPassword());
+        return user.getUsername() + " 비밀번호 변경 성공";
+    }
+
+    public String deleteUser(UserDTO user) {
+        UserDTO findUser = userMap.remove(user.getUsername());
+        return user.getUsername() + " 탈퇴 " + (findUser == null ? "실패" : "성공");
+    }
+
+    public List<UserDTO> findUsersByName(UserDTO user) {
+        List<UserDTO> userList = new ArrayList<>();
+        for(String key : userMap.keySet()){
+            UserDTO findUser = userMap.get(key);
+            if(user.getName().compareTo(findUser.getName()) == 0)   userList.add(findUser);
+        }
+        return userList;
+    }
+
+    public List<UserDTO> findUsersByJob(UserDTO user) {
+        List<UserDTO> userList = new ArrayList<>();
+        for(String key : userMap.keySet()){
+            UserDTO findUser = userMap.get(key);
+            if(user.getJob().compareTo(findUser.getJob()) == 0)   userList.add(findUser);
+        }
+        return userList;
     }
 }
