@@ -19,6 +19,7 @@ public class AccountController {
         accountService = AccountServiceImpl.getInstance();
         utilService = UtilServiceImpl.getInstance();
     }
+
     public String creatAccount(Scanner scan) {
         System.out.println("=== Create Account ===");
         System.out.println("Input(Account Number, Depositor)");
@@ -68,6 +69,14 @@ public class AccountController {
         System.out.println("=== Get Balance ===");
         System.out.println("Input(Account Number)");
         return accountService.deleteAccount(new AccountBuilder()
+                .accountNumber(scan.next())
+                .build());
+    }
+
+    public String findAccount(Scanner scan) {
+        System.out.println("=== Get Balance ===");
+        System.out.println("Input(Account Number)");
+        return accountService.findAccount(new AccountBuilder()
                 .accountNumber(scan.next())
                 .build());
     }

@@ -6,7 +6,10 @@ import repository.UserRepository;
 import service.AuthService;
 import service.UtilService;
 
+import java.awt.color.ICC_ColorSpace;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();
@@ -43,16 +46,15 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String join(UserDTO user) {
         users.put(user.getUsername(), user);
-        return "회원가입 성공 : " + user.toString();
+        return "회원가입 성공";
     }
 
     @Override
     public String login(UserDTO user) {
-        System.out.println(user);
-        UserDTO findUser = users.get(user.getUsername());
-        return findUser == null ? "아이디 없음" :
-               findUser.getPassword().compareTo(user.getPassword()) != 0 ? "아이디 불일치" :
-               "성공";
+        return users.getOrDefault(user.getUsername(), new UserBuilder().password("").build())
+                .getPassword()
+                .equals(user.getPassword()) ?
+                "로그인 성공" : "로그인 실패";
     }
 
     @Override
@@ -72,42 +74,29 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String updatePassword(UserDTO user) {
-        UserDTO findUser = users.get(user.getUsername());
-        if (findUser == null) return "계정을 찾을 수 없습니다.";
-        findUser.setPassword(user.getPassword());
-        findUser.setPasswordConfirm(user.getPassword());
+        users.getOrDefault(user.getUsername(), new UserBuilder().password("").build())
+                .setPassword(user.getPassword());
         return "비밀번호 변경 성공";
     }
 
     @Override
     public String deleteUser(String username) {
-        UserDTO user = users.remove(username);
-        return user != null ? "성공" : "실패";
+        return Objects.isNull(users.remove(username)) ? "실패" : "성공";
     }
 
     @Override
     public Map<String, UserDTO> getUserMap() {
-        return users;
+        return new HashMap<>(users);
     }
 
     @Override
     public List<UserDTO> findUsersByName(String name) {
-        List<UserDTO> userList = new ArrayList<>();
-        for (String key : users.keySet()) {
-            UserDTO value = users.get(key);
-            if (name.compareTo(value.getName()) == 0) userList.add(value);
-        }
-        return userList;
+        return users.values().stream().filter(i->i.getName().equals(name)).toList();
     }
 
     @Override
     public List<UserDTO> findUsersByJob(String job) {
-        List<UserDTO> userList = new ArrayList<>();
-        for (String key : users.keySet()) {
-            UserDTO value = users.get(key);
-            if (job.compareTo(value.getJob()) == 0) userList.add(value);
-        }
-        return userList;
+        return users.values().stream().filter(i->i.getJob().equals(job)).toList();
     }
 
     @Override

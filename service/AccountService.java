@@ -17,4 +17,6 @@ public interface AccountService {
     String getBalance(AccountDTO account);
 
     String deleteAccount(AccountDTO account);
+
+    String findAccount(AccountDTO account);
 }
