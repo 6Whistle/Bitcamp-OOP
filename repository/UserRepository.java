@@ -5,7 +5,6 @@ import model.UserDTO;
 import service.UtilService;
 import serviceImpl.UtilServiceImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,20 +80,16 @@ public class UserRepository {
     }
 
     public List<UserDTO> findUsersByName(UserDTO user) {
-        List<UserDTO> userList = new ArrayList<>();
-        for(String key : userMap.keySet()){
-            UserDTO findUser = userMap.get(key);
-            if(user.getName().compareTo(findUser.getName()) == 0)   userList.add(findUser);
-        }
-        return userList;
+        return userMap.values()
+                .stream()
+                .filter(j->j.getName().equals(user.getName()))
+                .toList();
     }
 
     public List<UserDTO> findUsersByJob(UserDTO user) {
-        List<UserDTO> userList = new ArrayList<>();
-        for(String key : userMap.keySet()){
-            UserDTO findUser = userMap.get(key);
-            if(user.getJob().compareTo(findUser.getJob()) == 0)   userList.add(findUser);
-        }
-        return userList;
+        return userMap.values()
+                .stream()
+                .filter(j->j.getJob().equals(user.getJob()))
+                .toList();
     }
 }
