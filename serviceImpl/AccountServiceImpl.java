@@ -1,5 +1,6 @@
 package serviceImpl;
 
+import lombok.Getter;
 import model.AccountDTO;
 import service.AccountService;
 
@@ -8,16 +9,15 @@ import java.util.Date;
 import java.util.List;
 
 public class AccountServiceImpl implements AccountService {
-    private static AccountService instance = new AccountServiceImpl();
+    @Getter
+    private final static AccountService instance = new AccountServiceImpl();
 
     private final List<AccountDTO> accountDTOList;
+
     private AccountServiceImpl(){
         accountDTOList = new ArrayList<>();
     }
 
-    public static AccountService getInstance() {
-        return instance;
-    }
 
     @Override
     public String creatAccount(AccountDTO account) {
@@ -34,16 +34,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String withdraw(AccountDTO account) {
+        double left = - account.getBalance();
         AccountDTO findAccount = accountDTOList.stream()
                 .filter(i->i.getAccountNumber().equals(account.getAccountNumber()))
                 .findFirst()
                 .orElse(null);
         if(findAccount == null) return  "We can't find your account";
-
-        double left = findAccount.getBalance() - account.getBalance();
-        if(left < 0)    return "You don't have enough amount";
-
-        findAccount.setBalance(account.getBalance());
+        if((left += findAccount.getBalance()) < 0)    return "You don't have enough amount";
+        findAccount.setBalance(left);
         findAccount.setTransactionDate(new Date());
         return account.getBalance() + " $ was withdrawn from " + findAccount.getAccountHolder();
     }
@@ -55,7 +53,6 @@ public class AccountServiceImpl implements AccountService {
                 .findFirst()
                 .orElse(null);
         if(findAccount == null) return  "We can't find your account";
-
         findAccount.setBalance(findAccount.getBalance() + account.getBalance());
         findAccount.setTransactionDate(new Date());
         return account.getBalance() + " $ was withdrawn from " + findAccount.getAccountHolder();
@@ -67,19 +64,14 @@ public class AccountServiceImpl implements AccountService {
                 .filter(i->i.getAccountNumber().equals(account.getAccountNumber()))
                 .findFirst()
                 .orElse(null);
-        if(findAccount == null) return  "We can't find your account";
-
-        return "Balance of " + findAccount.getAccountHolder() + " : " + findAccount.getBalance();
+        return (findAccount == null) ?
+                "We can't find your account" :
+                ("Balance of " + findAccount.getAccountHolder() + " : " + findAccount.getBalance());
     }
 
     @Override
     public String deleteAccount(AccountDTO account) {
-        for(int i = 0; i < accountDTOList.size(); i++){
-            if(accountDTOList.get(i).getAccountNumber().equals(account.getAccountNumber())){
-                accountDTOList.remove(i);
-                return "Your Account was deleted";
-            }
-        }
-        return "We can't find your account";
+        return accountDTOList.removeIf(i->i.getAccountNumber().equals(account.getAccountNumber())) ?
+                "We can't find your account" : "Your Account was deleted";
     }
 }

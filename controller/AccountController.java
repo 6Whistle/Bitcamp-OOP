@@ -12,8 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountController {
-    private AccountService accountService = AccountServiceImpl.getInstance();
-    private UtilService utilService = UtilServiceImpl.getInstance();
+    private final AccountService accountService;
+    private final UtilService utilService;
+
+    public AccountController(){
+        accountService = AccountServiceImpl.getInstance();
+        utilService = UtilServiceImpl.getInstance();
+    }
     public String creatAccount(Scanner scan) {
         System.out.println("=== Create Account ===");
         System.out.println("Input(Account Number, Depositor)");
