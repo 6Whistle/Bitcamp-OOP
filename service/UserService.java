@@ -1,6 +1,6 @@
 package service;
 
-import model.UserDTO;
+import model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -11,19 +11,19 @@ public interface UserService {
 
     String getUsersCount();
 
-    String join(UserDTO user);
+    String join(User user);
 
-    Map<String, UserDTO> getUserMap();
+    Map<String, User> getUserMap();
 
-    String login(UserDTO user);
+    String login(User user);
 
-    String getUserByUsername(UserDTO user);
+    String getUserByUsername(User user);
 
-    String updatePassword(UserDTO user);
+    String updatePassword(User user);
 
-    String deleteUser(UserDTO user);
+    String deleteUser(User user);
 
-    List<UserDTO> findUsersByName(UserDTO user);
+    List<User> findUsersByName(User user);
 
-    List<UserDTO> findUsersByJob(UserDTO user);
+    List<User> findUsersByJob(User user);
 }

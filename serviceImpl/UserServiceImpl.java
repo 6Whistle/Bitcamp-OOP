@@ -1,6 +1,6 @@
 package serviceImpl;
 
-import model.UserDTO;
+import model.User;
 import repository.UserRepository;
 import service.UserService;
 
@@ -31,42 +31,42 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String join(UserDTO user) {
+    public String join(User user) {
         return userRepository.join(user);
     }
 
     @Override
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         return userRepository.getUserMap();
     }
 
     @Override
-    public String login(UserDTO user) {
+    public String login(User user) {
         return userRepository.login(user);
     }
 
     @Override
-    public String getUserByUsername(UserDTO user) {
+    public String getUserByUsername(User user) {
         return userRepository.getUserByUsername(user);
     }
 
     @Override
-    public String updatePassword(UserDTO user) {
+    public String updatePassword(User user) {
         return userRepository.updatePassword(user);
     }
 
     @Override
-    public String deleteUser(UserDTO user) {
+    public String deleteUser(User user) {
         return userRepository.deleteUser(user);
     }
 
     @Override
-    public List<UserDTO> findUsersByName(UserDTO user) {
+    public List<User> findUsersByName(User user) {
         return userRepository.findUsersByName(user);
     }
 
     @Override
-    public List<UserDTO> findUsersByJob(UserDTO user) {
+    public List<User> findUsersByJob(User user) {
         return userRepository.findUsersByJob(user);
     }
 }

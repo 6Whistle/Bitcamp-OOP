@@ -1,7 +1,7 @@
 package controller;
 
 
-import builder.UserBuilder;
+import model.User;
 import service.AuthService;
 import serviceImpl.AuthServiceImpl;
 
@@ -21,7 +21,7 @@ public class AuthController {
     public void join(Scanner scan) {
         System.out.println("=== 회원가입 ===");
         System.out.println("입력(ID, 비밀번호, 비빌번호 확인, 이름, 주민번호, 전화번호, 주소, 직업)");
-        System.out.println(auth.join(new UserBuilder()
+        System.out.println(auth.join(User.builder()
                 .username(scan.next())
                 .password(scan.next())
                 .passwordConfirm(scan.next())
@@ -36,7 +36,7 @@ public class AuthController {
     public void login(Scanner scan) {
         System.out.println("=== 로그인 ===");
         System.out.println("입력(ID, 비밀번호)");
-        System.out.println(auth.login(new UserBuilder()
+        System.out.println(auth.login(User.builder()
                 .username(scan.next())
                 .password(scan.next())
                 .build()));
@@ -51,7 +51,7 @@ public class AuthController {
     public void updatePassword(Scanner scan) {
         System.out.println("=== 비번 변경 ===");
         System.out.println("입력(ID, 비번)");
-        System.out.println(auth.updatePassword(new UserBuilder()
+        System.out.println(auth.updatePassword(User.builder()
                 .username(scan.next())
                 .password(scan.next())
                 .build()));

@@ -1,8 +1,6 @@
 package view;
 
-
-import builder.BoardBuilder;
-import model.BoardDTO;
+import model.Board;
 import service.UtilService;
 import serviceImpl.UtilServiceImpl;
 
@@ -11,10 +9,10 @@ import java.util.List;
 
 public class BoardView {
     public static void main() {
-        List<BoardDTO> articles = new ArrayList<>();
+        List<Board> articles = new ArrayList<>();
         UtilService util = UtilServiceImpl.getInstance();
         for(int i = 0; i < 5; i++)
-            articles.add(new BoardBuilder()
+            articles.add(Board.builder()
                     .writer(util.createRandomName())
                     .title(util.createRandomTitle())
                     .content(util.createRandomContent())

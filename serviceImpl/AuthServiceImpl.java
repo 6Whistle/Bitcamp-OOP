@@ -1,23 +1,20 @@
 package serviceImpl;
 
-import builder.UserBuilder;
-import model.UserDTO;
-import repository.UserRepository;
+import model.User;
 import service.AuthService;
 import service.UtilService;
 
-import java.awt.color.ICC_ColorSpace;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();
 
-    private Map<String, UserDTO> users;
+    private Map<String, User> users;
+    private List<User> userDTOList;
 
     private AuthServiceImpl() {
         users = new HashMap<>();
+        userDTOList = new ArrayList<>();
     }
 
     public static AuthService getInstance() {
@@ -29,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
         UtilService util = UtilServiceImpl.getInstance();
         while (users.size() < 5) {
             String username = util.createRandomUsername();
-            users.put(username, new UserBuilder()
+            users.put(username, User.builder()
                     .username(username)
                     .password("1")
                     .passwordConfirm("1")
@@ -44,23 +41,23 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String join(UserDTO user) {
+    public String join(User user) {
         users.put(user.getUsername(), user);
         return "회원가입 성공";
     }
 
     @Override
-    public String login(UserDTO user) {
-        return users.getOrDefault(user.getUsername(), new UserBuilder().password("").build())
+    public String login(User user) {
+        return users.getOrDefault(user.getUsername(), User.builder().password("").build())
                 .getPassword()
                 .equals(user.getPassword()) ?
                 "로그인 성공" : "로그인 실패";
     }
 
     @Override
-    public UserDTO findUserByID(String username) {
-        UserDTO findUser = users.get(username);
-        return new UserBuilder()
+    public User findUserByID(String username) {
+        User findUser = users.get(username);
+        return User.builder()
                 .username(findUser.getUsername())
                 .password(findUser.getPassword())
                 .passwordConfirm(findUser.getPasswordConfirm())
@@ -73,8 +70,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String updatePassword(UserDTO user) {
-        users.getOrDefault(user.getUsername(), new UserBuilder().password("").build())
+    public String updatePassword(User user) {
+        users.getOrDefault(user.getUsername(), User.builder().password("").build())
                 .setPassword(user.getPassword());
         return "비밀번호 변경 성공";
     }
@@ -85,17 +82,17 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         return new HashMap<>(users);
     }
 
     @Override
-    public List<UserDTO> findUsersByName(String name) {
+    public List<User> findUsersByName(String name) {
         return users.values().stream().filter(i->i.getName().equals(name)).toList();
     }
 
     @Override
-    public List<UserDTO> findUsersByJob(String job) {
+    public List<User> findUsersByJob(String job) {
         return users.values().stream().filter(i->i.getJob().equals(job)).toList();
     }
 

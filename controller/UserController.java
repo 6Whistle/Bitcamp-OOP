@@ -1,7 +1,6 @@
 package controller;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.UserService;
 import serviceImpl.UserServiceImpl;
 
@@ -24,7 +23,7 @@ public class UserController {
     public String join(Scanner scan) {
         System.out.println("=== 회원가입 ===");
         System.out.println("입력(ID, PW, PW 확인, 이름, 주민번호, 전화번호, 주소, 직장");
-        return userService.join(new UserBuilder()
+        return userService.join(User.builder()
                 .username(scan.next())
                 .password(scan.next())
                 .passwordConfirm(scan.next())
@@ -39,7 +38,7 @@ public class UserController {
     public String login(Scanner scan) {
         System.out.println("=== 로그인 ===");
         System.out.println("입력(ID, PW)");
-        return userService.login(new UserBuilder()
+        return userService.login(User.builder()
                 .username(scan.next())
                 .password(scan.next())
                 .build());
@@ -48,7 +47,7 @@ public class UserController {
     public String getUserByUsername(Scanner scan) {
         System.out.println("=== ID 탐색 ===");
         System.out.println("입력(ID)");
-        return userService.getUserByUsername(new UserBuilder()
+        return userService.getUserByUsername(User.builder()
                 .username(scan.next())
                 .build());
     }
@@ -56,7 +55,7 @@ public class UserController {
     public String updatePassword(Scanner scan) {
         System.out.println("=== PW 변경 ===");
         System.out.println("입력(ID, PW)");
-        return userService.updatePassword(new UserBuilder()
+        return userService.updatePassword(User.builder()
                 .username(scan.next())
                 .password(scan.next())
                 .build());
@@ -65,32 +64,32 @@ public class UserController {
     public String deleteUser(Scanner scan) {
         System.out.println("=== 탈퇴 ===");
         System.out.println("입력(ID)");
-        return userService.deleteUser(new UserBuilder()
+        return userService.deleteUser(User.builder()
                 .username(scan.next())
                 .build());
     }
 
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         System.out.println("=== 회원 목록 ===");
-        Map<String, UserDTO> user = userService.getUserMap();
+        Map<String, User> user = userService.getUserMap();
         user.forEach((k, v) -> System.out.printf("{%s, %s}\n", k, v));
         return user;
     }
 
-    public List<UserDTO> findUsersByName(Scanner scan) {
+    public List<User> findUsersByName(Scanner scan) {
         System.out.println("=== 이름 검색 ===");
         System.out.println("입력(이름)");
-        List<UserDTO> userList = userService.findUsersByName(new UserBuilder()
+        List<User> userList = userService.findUsersByName(User.builder()
                 .name(scan.next())
                 .build());
         userList.forEach(i -> System.out.println(i.toString()));
         return userList;
     }
 
-    public List<UserDTO> findUsersByJob(Scanner scan) {
+    public List<User> findUsersByJob(Scanner scan) {
         System.out.println("=== 직업 검색 ===");
         System.out.println("입력(직업)");
-        List<UserDTO> userList = userService.findUsersByJob(new UserBuilder()
+        List<User> userList = userService.findUsersByJob(User.builder()
                 .job(scan.next())
                 .build());
         userList.forEach(i -> System.out.println(i.toString()));

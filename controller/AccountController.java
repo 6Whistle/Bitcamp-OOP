@@ -1,7 +1,6 @@
 package controller;
 
-import builder.AccountBuilder;
-import model.AccountDTO;
+import model.Account;
 import service.AccountService;
 import service.UtilService;
 import serviceImpl.AccountServiceImpl;
@@ -23,7 +22,7 @@ public class AccountController {
     public String creatAccount(Scanner scan) {
         System.out.println("=== Create Account ===");
         System.out.println("Input(Account Number, Depositor)");
-        return accountService.creatAccount(new AccountBuilder()
+        return accountService.creatAccount(Account.builder()
                 .id(utilService.createRandomInt(1, 100))
                 .accountNumber(scan.next())
                 .accountHolder(scan.next())
@@ -34,7 +33,7 @@ public class AccountController {
 
     public String getAccountsList() {
         System.out.println("== Account List ===");
-        List<AccountDTO> list = accountService.getAccountsList();
+        List<Account> list = accountService.getAccountsList();
         list.forEach(System.out::println);
         return "------------------";
     }
@@ -42,7 +41,7 @@ public class AccountController {
     public String withdraw(Scanner scan) {
         System.out.println("=== Withdraw ===");
         System.out.println("Input(Account Number, amount)");
-        return accountService.withdraw(new AccountBuilder()
+        return accountService.withdraw(Account.builder()
                 .accountNumber(scan.next())
                 .balance(Double.parseDouble(scan.next()))
                 .build());
@@ -51,7 +50,7 @@ public class AccountController {
     public String deposit(Scanner scan) {
         System.out.println("=== Deposit ===");
         System.out.println("Input(Account Number, amount)");
-        return accountService.deposit(new AccountBuilder()
+        return accountService.deposit(Account.builder()
                 .accountNumber(scan.next())
                 .balance(Double.parseDouble(scan.next()))
                 .build());
@@ -60,7 +59,7 @@ public class AccountController {
     public String getBalance(Scanner scan) {
         System.out.println("=== Get Balance ===");
         System.out.println("Input(Account Number)");
-        return accountService.getBalance(new AccountBuilder()
+        return accountService.getBalance(Account.builder()
                 .accountNumber(scan.next())
                 .build());
     }
@@ -68,7 +67,7 @@ public class AccountController {
     public String deleteAccount(Scanner scan) {
         System.out.println("=== Get Balance ===");
         System.out.println("Input(Account Number)");
-        return accountService.deleteAccount(new AccountBuilder()
+        return accountService.deleteAccount(Account.builder()
                 .accountNumber(scan.next())
                 .build());
     }
@@ -76,7 +75,7 @@ public class AccountController {
     public String findAccount(Scanner scan) {
         System.out.println("=== Get Balance ===");
         System.out.println("Input(Account Number)");
-        return accountService.findAccount(new AccountBuilder()
+        return accountService.findAccount(Account.builder()
                 .accountNumber(scan.next())
                 .build());
     }
