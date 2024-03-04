@@ -15,7 +15,6 @@ public class UserController {
         this.userService = UserServiceImpl.getInstance();
     }
 
-
     public String addUser() {
         return userService.addUsers();
     }
@@ -69,27 +68,27 @@ public class UserController {
                 .build());
     }
 
-    public Map<String, User> getUserMap() {
+    public Map<String, ?> getUserMap() {
         System.out.println("=== 회원 목록 ===");
-        Map<String, User> user = userService.getUserMap();
+        Map<String, ?> user = userService.getUserMap();
         user.forEach((k, v) -> System.out.printf("{%s, %s}\n", k, v));
         return user;
     }
 
-    public List<User> findUsersByName(Scanner scan) {
+    public List<?> findUsersByName(Scanner scan) {
         System.out.println("=== 이름 검색 ===");
         System.out.println("입력(이름)");
-        List<User> userList = userService.findUsersByName(User.builder()
+        List<?> userList = userService.findUsersByName(User.builder()
                 .name(scan.next())
                 .build());
         userList.forEach(i -> System.out.println(i.toString()));
         return userList;
     }
 
-    public List<User> findUsersByJob(Scanner scan) {
+    public List<?> findUsersByJob(Scanner scan) {
         System.out.println("=== 직업 검색 ===");
         System.out.println("입력(직업)");
-        List<User> userList = userService.findUsersByJob(User.builder()
+        List<?> userList = userService.findUsersByJob(User.builder()
                 .job(scan.next())
                 .build());
         userList.forEach(i -> System.out.println(i.toString()));

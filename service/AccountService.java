@@ -8,7 +8,7 @@ public interface AccountService {
 
     String creatAccount(Account account);
 
-    List<Account> getAccountsList();
+    List<?> getAccountsList();
 
     String withdraw(Account account);
 

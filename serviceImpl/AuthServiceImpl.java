@@ -82,17 +82,17 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Map<String, User> getUserMap() {
+    public Map<String, ?> getUserMap() {
         return new HashMap<>(users);
     }
 
     @Override
-    public List<User> findUsersByName(String name) {
+    public List<?> findUsersByName(String name) {
         return users.values().stream().filter(i->i.getName().equals(name)).toList();
     }
 
     @Override
-    public List<User> findUsersByJob(String job) {
+    public List<?> findUsersByJob(String job) {
         return users.values().stream().filter(i->i.getJob().equals(job)).toList();
     }
 

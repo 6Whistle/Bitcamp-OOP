@@ -33,7 +33,7 @@ public class AccountController {
 
     public String getAccountsList() {
         System.out.println("== Account List ===");
-        List<Account> list = accountService.getAccountsList();
+        List<?> list = accountService.getAccountsList();
         list.forEach(System.out::println);
         return "------------------";
     }

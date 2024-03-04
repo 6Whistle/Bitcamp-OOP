@@ -26,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getAccountsList() {
+    public List<?> getAccountsList() {
         return new ArrayList<>(accountDTOList);
     }
 

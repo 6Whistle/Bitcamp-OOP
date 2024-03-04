@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, User> getUserMap() {
+    public Map<String, ?> getUserMap() {
         return userRepository.getUserMap();
     }
 
@@ -61,12 +61,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsersByName(User user) {
+    public List<?> findUsersByName(User user) {
         return userRepository.findUsersByName(user);
     }
 
     @Override
-    public List<User> findUsersByJob(User user) {
+    public List<?> findUsersByJob(User user) {
         return userRepository.findUsersByJob(user);
     }
 }

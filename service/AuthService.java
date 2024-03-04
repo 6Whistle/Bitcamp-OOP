@@ -12,9 +12,9 @@ public interface AuthService {
     User findUserByID(String username);
     String updatePassword(User user);
     String deleteUser(String username);
-    Map<String, User> getUserMap();
-    List<User> findUsersByName(String name);
-    List<User> findUsersByJob(String job);
+    Map<String, ?> getUserMap();
+    List<?> findUsersByName(String name);
+    List<?> findUsersByJob(String job);
 
     String countUsers();
 }

@@ -13,7 +13,7 @@ public interface UserService {
 
     String join(User user);
 
-    Map<String, User> getUserMap();
+    Map<String, ?> getUserMap();
 
     String login(User user);
 
@@ -23,7 +23,7 @@ public interface UserService {
 
     String deleteUser(User user);
 
-    List<User> findUsersByName(User user);
+    List<?> findUsersByName(User user);
 
-    List<User> findUsersByJob(User user);
+    List<?> findUsersByJob(User user);
 }
