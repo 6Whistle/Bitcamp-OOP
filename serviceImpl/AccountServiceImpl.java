@@ -18,7 +18,6 @@ public class AccountServiceImpl implements AccountService {
         accountDTOList = new ArrayList<>();
     }
 
-
     @Override
     public String creatAccount(Account account) {
         accountDTOList.add(account);
